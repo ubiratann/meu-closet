@@ -17,6 +17,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { NgxMaskModule } from 'ngx-mask';
+import { Camera } from '@awesome-cordova-plugins/camera/ngx';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { NgxMaskModule } from 'ngx-mask';
 
     NgxMaskModule.forRoot()
   ],
-  declarations: [SigninPage]
+  declarations: [SigninPage],
+  providers: [Camera]
 })
 export class SigninPageModule {}
