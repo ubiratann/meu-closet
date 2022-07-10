@@ -20,20 +20,18 @@ export class LoginPage implements OnInit {
     this.menuCtrl.enable(false);
   }
 
-
-  getErrorMessage() {
-    if (this.email.hasError('required')) {
-      return 'Você precisa inserir um email';
-    }
-    return this.email.hasError('email') ? 'Email inválido!' : '';
+  getEmailErrorMessage() {
+    if (this.email.hasError('required')) 
+      return 'Você precisa informar um email!';
+    return this.email.hasError('email') ? 'Você precisa informar um email válido!' : '';
   }
 
   login(){
-    this.router.navigate(['/folder'])
+    this.router.navigate(['/folder']);
   }
 
   signin(){
-    this.router.navigateByUrl('/signin')
+    this.router.navigate(['/signin']);
   }
 
 }

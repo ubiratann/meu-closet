@@ -13,7 +13,7 @@ export class SigninPage implements OnInit {
   
   email = new FormControl('', [Validators.required, Validators.email]);
   full_name = new FormControl('', [Validators.required]);
-  phone = new FormControl('', [Validators.required, Validators.pattern('^\([1-9]{2}\) (?:[2-8]|9[1-9])[0-9]{3}\-[0-9]{4}$')])
+  phone = new FormControl('', [Validators.required])
 
   constructor(
     private menuCtrl: MenuController,
@@ -26,20 +26,16 @@ export class SigninPage implements OnInit {
 
   getEmailErrorMessage() {
     if (this.email.hasError('required')) 
-      return 'Você precisa inserir um email';
+      return 'Você precisa informar um email!';
     
-    return this.email.hasError('email') ? 'Email inválido!' : '';
+    return this.email.hasError('email') ? 'Você precisa informar um email válido!' : '';
   }
 
   getNameErrorMessage(){
-    return 'Você precisa inserir seu nome!';
+    return 'Você precisa informar seu nome!';
   }
 
   getPhoneErrorMessage(){
-    if (this.email.hasError('required')) 
-      return 'Você precisa inserir um número de telefone!'
-    
-    return 'O formato do número é inválido!';
-  
+    return 'Você precisa informar um número de telefone válido!';
   }
 }
