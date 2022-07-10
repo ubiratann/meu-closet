@@ -1,9 +1,47 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>login</ion-title>
+    <ion-title>Login</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content >
+  <ion-grid>
+
+    <ion-row>
+
+    </ion-row>
+
+    <ion-row >
+      <ion-col class="flex ion-justify-content-center">
+        <mat-form-field appearance="fill" class="width60">
+          <mat-label>Email</mat-label>
+          <input matInput [formControl]="email" required>
+          <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col  class="flex ion-justify-content-center" >
+        <mat-form-field appearance="fill" class="width60">
+          <mat-label>Senha</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Ocultar senha'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="flex ion-justify-content-center">
+      <div>
+        <button mat-raised-button color="primary" (click)="login()">Login</button>
+      </div>
+      <div>
+        <button mat-stroked-button colo="primary" (click)="signin()">Cadastre-se</button>
+      </div>
+    </ion-row>
+
+  </ion-grid>
 
 </ion-content>
