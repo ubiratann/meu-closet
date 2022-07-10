@@ -1,9 +1,64 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Cadastre-se</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Cadastro</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content >
+  <ion-grid>
+    
+    
+    <ion-row >
+      <ion-col class="flex ion-justify-content-center">
+        <mat-form-field appearance="fill" class="width60">
+          <mat-label>Nome</mat-label>
+          <input matInput [formControl]="full_name" required>
+          <mat-error *ngIf="full_name.invalid">{{getNameErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </ion-col>
+    </ion-row>
+
+    <ion-row >
+      <ion-col class="flex ion-justify-content-center">
+        <mat-form-field appearance="fill" class="width60">
+          <mat-label>Telefone</mat-label>
+          <input mask="(00) 0 0000-0000"  matInput [formControl]="phone" required>
+          <mat-error *ngIf="phone.invalid">{{getPhoneErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </ion-col>
+    </ion-row>
+
+    <ion-row >
+      <ion-col class="flex ion-justify-content-center">
+        <mat-form-field appearance="fill" class="width60">
+          <mat-label>Email</mat-label>
+          <input matInput [formControl]="email" required>
+          <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col  class="flex ion-justify-content-center" >
+        <mat-form-field appearance="fill" class="width60">
+          <mat-label>Senha</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Ocultar senha'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="flex ion-justify-content-center">
+      <div>
+        <button mat-raised-button color="primary" (click)="signin()">Cadastrar</button>
+      </div>
+    </ion-row>
+
+  </ion-grid>
 
 </ion-content>
