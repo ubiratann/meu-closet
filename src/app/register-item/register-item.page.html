@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+</ion-header>
+
+<ion-content >
+  <ion-grid>
+    
+    <ion-row style="margin-top: 5vh;">
+      <ion-col  class="flex ion-justify-content-center">
+        <div id="photoIcon" class="flex ion-justify-content-center" (click)="setProductPhoto()">
+          <img [src]="image_uri" alt="">
+        </div>
+      </ion-col> 
+    </ion-row>
+    
+    <ion-row style="margin-top: 5vh;" >
+      <ion-col class="flex ion-justify-content-center">
+        <mat-form-field appearance="fill" class="width60">
+          <mat-label>Descrição</mat-label>
+          <input  matInput [formControl]="description" required>
+          <mat-error *ngIf="description.invalid">{{getDescriptionErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </ion-col>
+    </ion-row>
+
+    <ion-row >
+      <ion-col class="flex ion-justify-content-center">
+        <mat-form-field appearance="fill" floatLabel="always"  class="width60" >
+          <mat-label>Valor que foi comprado</mat-label > 
+          <input  matInput type="number" class="example-right-align" placeholder="0">
+          <span matPrefix>R$&nbsp;</span>
+        </mat-form-field>
+      </ion-col>
+    </ion-row>
+
+    <ion-row >
+      <ion-col class="flex ion-justify-content-center">
+        <mat-form-field appearance="fill" floatLabel="always"  class="width60" >
+          <mat-label>Valor de venda</mat-label>
+          <input  matInput type="number" class="example-right-align" placeholder="0">
+          <span matPrefix>R$&nbsp;</span>
+        </mat-form-field>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="flex ion-justify-content-center">
+        <mat-form-field appearance="fill"  class="width60" >
+          <mat-label>Categoria</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let category of categories" [value]="category.id">{{category.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>  
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="flex ion-justify-content-center">
+      <div>
+        <button mat-raised-button color="primary">Cadastrar</button>
+      </div>
+    </ion-row>
+
+  </ion-grid>
+
+</ion-content>
