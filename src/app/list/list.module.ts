@@ -8,12 +8,19 @@ import { ListPageRoutingModule } from './list-routing.module';
 
 import { ListPage } from './list.page';
 
+import { MatIconModule } from '@angular/material/icon';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatButtonModule } from '@angular/material/button';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ListPageRoutingModule
+    ListPageRoutingModule,
+    MatButtonModule,
+    MatBadgeModule,
+    MatIconModule
   ],
   declarations: [ListPage]
 })

@@ -1,9 +1,52 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>list</ion-title>
-  </ion-toolbar>
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
 </ion-header>
 
-<ion-content>
+<ion-content> 
+  <ion-grid>
+    <ion-row >
+      <ion-col class="flex ion-justify-content-between ion-align-items-center">
+        <div id="results">
+          {{clothes.length}} Resultados
+        </div>
+        <button mat-button color="primary">Filtros ({{filters.length}})</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content>
+   </ion-refresher-content>
+  </ion-refresher>
+
+  <span *ngFor="let cloth of clothes" >
+      <ion-card>  
+        <div class="container">
+          <img class="fit" [src]="cloth.image" alt="">
+          <div class="overlap">
+            <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon" class="floatRight">
+              <mat-icon>share</mat-icon>
+            </button>  
+          </div>
+        </div>
+        <ion-card-header>
+          <ion-card-title><strong>{{cloth.salePrice | currency : 'BRL'}}</strong></ion-card-title>
+          <ion-card-title>{{cloth.description}}</ion-card-title>
+          <ion-card-subtitle>
+            <p>Comprado por: <strong>{{cloth.purchasePrice | currency : 'BRL'}}</strong></p>
+          </ion-card-subtitle>
+        </ion-card-header>
+      </ion-card>
+  </span>
+
+  <ion-infinite-scroll threshold="100px" id="infinite-scroll">
+    <ion-infinite-scroll-content loading-spinner="bubbles" loading-text="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
