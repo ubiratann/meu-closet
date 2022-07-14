@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "meu-closet-f0d18": {
+      "hosting": {
+        "app": [
+          "meu-closet-f0d18"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "meu-closet-f0d18"
+  }
+}

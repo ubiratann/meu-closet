@@ -1,22 +1,28 @@
 <ion-header>
-  <ion-header>
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Cadastrar no closet!</ion-title>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content >
   <ion-grid>
     
     <ion-row style="margin-top: 5vh;">
-      <ion-col  class="flex ion-justify-content-center">
-        <div id="photoIcon" class="flex ion-justify-content-center" (click)="setProductPhoto()">
+      <ion-col  class="flex ion ion-justify-content-center">
+        <div id="photoIcon" class="flex ion-justify-content-center">
           <img [src]="image_uri" alt="">
         </div>
-      </ion-col> 
+      </ion-col>
+    </ion-row>
+
+    <ion-row style="margin-top: 10px;" class="flex ion ion-justify-content-center">
+      <button (click)="setProductPhoto()"  mat-stroked-button color="acent">Escolher foto </button>
     </ion-row>
     
     <ion-row style="margin-top: 5vh;" >

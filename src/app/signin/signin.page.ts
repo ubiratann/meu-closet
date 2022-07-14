@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { MenuController } from '@ionic/angular';
 import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 import { ToastController } from '@ionic/angular';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AlertController, LoadingController, MenuController } from '@ionic/angular';
+import { AuthService } from '../services/auth/auth.service';
 
 @Component({
   selector: 'app-signin',
@@ -12,9 +13,8 @@ import { ToastController } from '@ionic/angular';
 })
 export class SigninPage implements OnInit {
   
-  email = new FormControl('', [Validators.required, Validators.email]);
-  full_name = new FormControl('', [Validators.required]);
-  phone = new FormControl('', [Validators.required]);
+  credentials: FormGroup;
+
   hide = true;
   image_uri: string = "../../assets/add-photo-icon-19.jpg";
 
@@ -27,29 +27,23 @@ export class SigninPage implements OnInit {
   }
 
   constructor(
-    private menuCtrl: MenuController,
-    private router: Router,
+    private fb: FormBuilder,
     private camera: Camera,
-    private toastController: ToastController) { }
-
+    private toastController: ToastController, 
+    private router: Router,
+    private loadingController: LoadingController,
+    private alertController: AlertController,
+    private authService: AuthService,) { }
+  
   ngOnInit() {
-    this.menuCtrl.enable(false);
+    this.credentials = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      displayName: ['', [Validators.required]],
+      phone: ['']
+    });
   }
 
-  getEmailErrorMessage() {
-    if (this.email.hasError('required')) 
-      return 'Você precisa informar um email!';
-    
-    return this.email.hasError('email') ? 'Você precisa informar um email válido!' : '';
-  }
-
-  getNameErrorMessage(){
-    return 'Você precisa informar seu nome!';
-  }
-
-  getPhoneErrorMessage(){
-    return 'Você precisa informar um número de telefone válido!'; 
-  }
 
   setAvatar(){
     this.camera.getPicture(this.cameraOptions).then( image => {
@@ -66,5 +60,35 @@ export class SigninPage implements OnInit {
     }); 
   }
 
+  async signin(){
+    const loading = await this.loadingController.create();
+    await loading.present();
+    this.credentials.addControl('photo', new FormControl(this.image_uri))
+    const user = await this.authService.register(this.credentials.value);
+    await loading.dismiss();
+  
+    if (user) {
+      this.router.navigateByUrl('/list', { replaceUrl: true });
+    } 
+  }
 
+  get email() {
+    return this.credentials.get('email');
+  }
+ 
+  get password() {
+    return this.credentials.get('password');
+  }
+
+  get displayName() {
+    return this.credentials.get('displayName');
+  }
+
+  get photo(){
+    return this.image_uri;
+  }
+
+  get phone(){
+    return this.credentials.get('phone')
+  }
 }

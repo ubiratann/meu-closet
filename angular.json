@@ -147,6 +147,16 @@
               "devServerTarget": "app:serve:ci"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "app:build:production",
+            "firebaseProject": "meu-closet-f0d18",
+            "firebaseHostingSite": "meu-closet-f0d18"
+          }
         }
       }
     }

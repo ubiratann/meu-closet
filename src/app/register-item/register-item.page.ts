@@ -18,6 +18,7 @@ export class RegisterItemPage implements OnInit {
   image_uri: string = "../../assets/add-photo-icon-19.jpg";
   product: Product;
   sel_category: string;
+  photo_selected: boolean = false;
 
   cameraOptions: CameraOptions = {
     quality: 100,
@@ -51,6 +52,7 @@ export class RegisterItemPage implements OnInit {
     this.camera.getPicture(this.cameraOptions).then( image => {
       console.log(image)
       this.image_uri = 'data:image/jpeg;base64,' + image;
+      this.photo_selected = true;
     }).catch(error => {
       this.toastController.create({
         message: 'Erro na câmera!',
@@ -61,4 +63,5 @@ export class RegisterItemPage implements OnInit {
       });
     }); 
   }
+
 }

@@ -1,19 +1,32 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import {
+  redirectUnauthorizedTo,
+  redirectLoggedInTo,
+  canActivate,
+} from '@angular/fire/auth-guard';
+ 
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
+const redirectLoggedInToHome = () => redirectLoggedInTo(['list']);
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'list',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
   {
     path: 'signin',
-    loadChildren: () => import('./signin/signin.module').then( m => m.SigninPageModule)
+    loadChildren: () => import('./signin/signin.module').then( m => m.SigninPageModule),
+    ...canActivate(redirectUnauthorizedToLogin),
+    ...canActivate(redirectLoggedInToHome)
   },
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule),
+    ...canActivate(redirectUnauthorizedToLogin),
+    ...canActivate(redirectLoggedInToHome)
+
   },
   {
     path: 'search',
@@ -21,11 +34,14 @@ const routes: Routes = [
   },
   {
     path: 'list',
-    loadChildren: () => import('./list/list.module').then( m => m.ListPageModule)
+    loadChildren: () => import('./list/list.module').then( m => m.ListPageModule),
+    ...canActivate(redirectUnauthorizedToLogin),
   },
   {
     path: 'register-item',
-    loadChildren: () => import('./register-item/register-item.module').then( m => m.RegisterItemPageModule)
+    loadChildren: () => import('./register-item/register-item.module').then( m => m.RegisterItemPageModule),
+    ...canActivate(redirectUnauthorizedToLogin),
+
   },
 ];
 

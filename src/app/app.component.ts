@@ -5,9 +5,13 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
+
+  userName = 'teste';
+   
   public appPages = [
     { title: 'Produtos', url: '/list', icon: 'mail' },
     { title: 'Cadastrar', url: '/register-item', icon: 'paper-plane' }
   ];
-  constructor() {}
 }
+
+// 4/0AdQt8qiVENAR3J1ablWXvL8wcNLSvGKEg3KWn8fsh2JevtsiZSGR18jBInNzNkLJOwSicw

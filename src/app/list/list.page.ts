@@ -3,6 +3,8 @@ import { IonModal, ModalController } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
 
 import { RefresherCustomEvent } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { AuthService } from '../services/auth/auth.service';
 
 @Component({
   selector: 'app-list',
@@ -15,7 +17,11 @@ export class ListPage implements OnInit {
   filters = [];
   @ViewChild(IonModal) modal: IonModal;
 
-  constructor(private modalController: ModalController) { }
+  constructor(
+    private routerCtrl: Router,
+    private authService: AuthService,
+    private router: Router
+    ) { }
 
   ngOnInit() {
     this.clothes = [
@@ -74,6 +80,13 @@ export class ListPage implements OnInit {
   async doRefresh(event: RefresherCustomEvent){
 
         
+  }
+
+  async logout(){
+    await this.authService.logout();
+    await this.authService.logout();
+    this.router.navigateByUrl('/login', { replaceUrl: true });
+
   }
 
 }

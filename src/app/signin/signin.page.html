@@ -8,64 +8,72 @@
 </ion-header>
 
 <ion-content >
-  <ion-grid>
-    
-    <ion-row>
-      <ion-col  class="flex ion-justify-content-center">
-        <div id="photoIcon" class="flex ion-justify-content-center" (click)="setAvatar()">
-          <img [src]="image_uri" alt="">
+  <form  (ngSubmit)="signin()" [formGroup]="credentials">
+
+    <ion-grid>
+      
+      <ion-row>
+        <ion-col  class="flex ion-justify-content-center">
+          <div id="photoIcon" class="flex ion-justify-content-center">
+            <img [src]="image_uri" alt="">
+          </div>
+        </ion-col> 
+      </ion-row>
+
+      <ion-row style="margin-top: 10px;" class="flex  ion-justify-content-center">
+        <button (click)="setAvatar()"  mat-stroked-button color="acent">Escolher foto </button>
+      </ion-row>
+      
+      <ion-row >
+        <ion-col class="flex ion-justify-content-center">
+          <mat-form-field appearance="fill" class="width60">
+            <mat-label>Nome</mat-label>
+            <input matInput formControlName="displayName" required>
+            <mat-error *ngIf="(displayName.dirty || displayName.touched) && displayName.errors" >Nome inválido!</mat-error>
+          </mat-form-field>
+        </ion-col>
+      </ion-row>
+
+      <ion-row >
+        <ion-col class="flex ion-justify-content-center">
+          <mat-form-field appearance="fill" class="width60">
+            <mat-label>Telefone</mat-label>
+            <input mask="(00) 0 0000-0000"  matInput formControlName="phone" required>
+            <mat-error *ngIf="(phone.dirty || phone.touched) && phone.errors">Telefone inválido!</mat-error>
+          </mat-form-field>
+        </ion-col>
+      </ion-row>
+
+      <ion-row >
+        <ion-col class="flex ion-justify-content-center">
+          <mat-form-field appearance="fill" class="width60">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" required>
+            <mat-error *ngIf="(email.dirty || email.touched) && email.errors">Email inválido</mat-error>
+          </mat-form-field>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col  class="flex ion-justify-content-center" >
+          <mat-form-field appearance="fill" class="width60">
+            <mat-label>Senha</mat-label>
+            <input formControlName="password" required  matInput [type]="hide ? 'password' : 'text'">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Ocultar senha'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-error *ngIf="(password.dirty || password.touched) && password.errors">Senha inválida!</mat-error>
+          </mat-form-field>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="flex ion-justify-content-center">
+        <div>
+          <button mat-raised-button color="primary" type="submit">Cadastrar</button>
         </div>
-      </ion-col> 
-    </ion-row>
-    
-    <ion-row >
-      <ion-col class="flex ion-justify-content-center">
-        <mat-form-field appearance="fill" class="width60">
-          <mat-label>Nome</mat-label>
-          <input matInput [formControl]="full_name" required>
-          <mat-error *ngIf="full_name.invalid">{{getNameErrorMessage()}}</mat-error>
-        </mat-form-field>
-      </ion-col>
-    </ion-row>
+      </ion-row>
 
-    <ion-row >
-      <ion-col class="flex ion-justify-content-center">
-        <mat-form-field appearance="fill" class="width60">
-          <mat-label>Telefone</mat-label>
-          <input mask="(00) 0 0000-0000"  matInput [formControl]="phone" required>
-          <mat-error *ngIf="phone.invalid">{{getPhoneErrorMessage()}}</mat-error>
-        </mat-form-field>
-      </ion-col>
-    </ion-row>
-
-    <ion-row >
-      <ion-col class="flex ion-justify-content-center">
-        <mat-form-field appearance="fill" class="width60">
-          <mat-label>Email</mat-label>
-          <input matInput [formControl]="email" required>
-          <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
-        </mat-form-field>
-      </ion-col>
-    </ion-row>
-
-    <ion-row>
-      <ion-col  class="flex ion-justify-content-center" >
-        <mat-form-field appearance="fill" class="width60">
-          <mat-label>Senha</mat-label>
-          <input matInput [type]="hide ? 'password' : 'text'">
-          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Ocultar senha'" [attr.aria-pressed]="hide">
-            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-          </button>
-        </mat-form-field>
-      </ion-col>
-    </ion-row>
-
-    <ion-row class="flex ion-justify-content-center">
-      <div>
-        <button mat-raised-button color="primary" (click)="signin()">Cadastrar</button>
-      </div>
-    </ion-row>
-
-  </ion-grid>
+    </ion-grid>
+  </form>
 
 </ion-content>
